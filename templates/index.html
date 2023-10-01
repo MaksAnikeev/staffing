@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">">
+
+  <title>Штатное расписание</title>
+</head>
+<body>
+  <div class="container">
+  <h1>Структура компании Х</h1>
+    <div class="row justify-content-center">>
+            <div class="card mt-4" style="max-width: 540px;">
+                <div class="row no-gutters">
+                    <div class="col-md-16">
+                        <div class="card-body">
+                            <h2 class="card-title">{{position}}</h2>
+                            <h4 class="card-text">{{fullname}}</h4>
+                            <div> дата устройства {{entry_date}} </div>
+                            <div> зарплата {{salary}} руб</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+    <div class="row">
+      {% for subordinate in subordinates %}
+      <div class="col">
+          <div class="card mt-4" style="max-width: 540px;">
+                <div class="row no-gutters">
+                    <div class="col-md-16">
+                        <div class="card-body">
+                            <h4 class="card-title">{{subordinate.position}}</h4>
+                            <h5 class="card-text">{{subordinate.fullname}}</h5>
+                            <div> дата устройства {{subordinate.entry_date}}</div>
+                            <div> зарплата {{subordinate.salary}}</div>
+                            <p> </p>
+                            {% for subordinate in subordinate.subordinates %}
+                            <div class="col">
+                                <h6> {{subordinate.position}}</h6>
+                                <h6> {{subordinate.fullname}}</h6>
+                                <div> дата устройства {{subordinate.entry_date}}</div>
+                                <div> зарплата {{subordinate.salary}}</div>
+                                <p> </p>
+                                {% for subordinate in subordinate.subordinates %}
+                                <div class="col">
+                                    <h6> {{subordinate.position}}</h6>
+                                    <div> {{subordinate.fullname}}</div>
+                                    <div> дата устройства {{subordinate.entry_date}}</div>
+                                    <div> з.пл {{subordinate.salary}}</div>
+                                    <p> </p>
+                                    {% for subordinate in subordinate.subordinates %}
+                                    <div class="col">
+                                        <h6> {{subordinate.position}}</h6>
+                                        <div> {{subordinate.fullname}}</div>
+                                        <div> дата устройства {{subordinate.entry_date}}</div>
+                                        <div> з.пл {{subordinate.salary}}</div>
+                                        <p> </p>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                                {% endfor %}
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+           </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+</body>
+</html>
